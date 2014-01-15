@@ -1,47 +1,47 @@
 ##########
-### P0 ###	Rot
+### P0 ###    Rot
 ##########
-P0.0	Spur 1: Links	(Bahn)
-P0.1	Spur 1: Rechts	(Bahn)
-P0.2	Spur 2: Links
-P0.3	Spur 2: Rechts
-P0.4	Spur 3: Links
-P0.5	Spur 3: Rechts
-P0.6	Spur 4: Links
-P0.7	Spur 4: Rechts
+P0.0    Spur 1: Links    (Bahn)
+P0.1    Spur 1: Rechts   (Bahn)
+P0.2    Spur 2: Links
+P0.3    Spur 2: Rechts
+P0.4    Spur 3: Links
+P0.5    Spur 3: Rechts
+P0.6    Spur 4: Links
+P0.7    Spur 4: Rechts
 
 ##########
-### P1 ###	Orange
+### P1 ###    Orange
 ##########
-P1.0	Spur 1: Links	(Bahn)
-P1.1	Spur 1: Rechts	(Bahn)
-P1.2	Spur 2: Links
-P1.3	Spur 2: Rechts
-P1.4	Spur 2: Links
-P1.5	Spur 2: Rechts
-P1.6	Spur 2: Links
-P1.7	Spur 2: Rechts
+P1.0    Spur 1: Links    (Bahn)
+P1.1    Spur 1: Rechts   (Bahn)
+P1.2    Spur 2: Links
+P1.3    Spur 2: Rechts
+P1.4    Spur 3: Links
+P1.5    Spur 3: Rechts
+P1.6    Spur 4: Links
+P1.7    Spur 4: Rechts
 
 ##########
-### P2 ###	Grün
+### P2 ###    Grün
 ##########
-P2.0	Spur 1: Links	(Bahn)
-P2.1	Spur 1: Rechts	(Bahn)
-P2.2	Spur 2: Links
-P2.3	Spur 2: Rechts
-P2.4	Spur 2: Links
-P2.5	Spur 2: Rechts
-P2.6	Spur 2: Links
-P2.7	Spur 2: Rechts
+P2.0    Spur 1: Links    (Bahn)
+P2.1    Spur 1: Rechts   (Bahn)
+P2.2    Spur 2: Links
+P2.3    Spur 2: Rechts
+P2.4    Spur 3: Links
+P2.5    Spur 3: Rechts
+P2.6    Spur 4: Links
+P2.7    Spur 4: Rechts
 
 ##########
-### P3 ###	misc
+### P3 ###   misc
 ##########
-P3.0	Fußgängertaster 1/3 (Bahn)	#### Fußgängertaster 1 + 2 werden als AND geschaltet, um 3 Taster auslesen zu können
-P3.1	Fußgängertaster 2/3		####  P3.0=1 and P3.1=0 --> Taster 1  #  P3.0=0 and P3.1=1 --> Taster 2  #  P3.0=1 and P3.1=1 --> Taster 3
-P3.2	Fußgängertaster 4
-P3.3	Fußgängerampel 1 (Bahn)		### 1 = Rot; 0 = Grün
-P3.4	Fußgängerampel 2 		### 1 = Rot; 0 = Grün
-P3.5	Fußgängerampel 3 		### 1 = Rot; 0 = Grün
-P3.6	Fußgängerampel 4 		### 1 = Rot; 0 = Grün
-P3.7	Input Bahnschranke		### 1 = Schranke zu; 0 = Schranke offen
+P3.0    Fußgängertaster 1/3  (Bahn)      ### Fußgängertaster 1 + 2 werden als AND geschaltet, um 3 Taster auslesen zu können
+P3.1    Fußgängertaster 2/3              ###  P3.0=1 and P3.1=0 --> Taster 1  |  P3.0=0 and P3.1=1 --> Taster 2  |  P3.0=1 and P3.1=1 --> Taster 3
+P3.2    Fußgängertaster 4
+P3.3    Fußgängerampel 1     (Bahn)      ### 1 = Rot; 0 = Grün
+P3.4    Fußgängerampel 2                 ### 1 = Rot; 0 = Grün
+P3.5    Fußgängerampel 3                 ### 1 = Rot; 0 = Grün
+P3.6    Fußgängerampel 4                 ### 1 = Rot; 0 = Grün
+P3.7    Input Bahnschranke               ### 1 = Schranke zu; 0 = Schranke offen
