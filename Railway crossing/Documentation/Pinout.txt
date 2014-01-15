@@ -1,24 +1,24 @@
 ##########
-### P0 ###
+### P0 ###	Signale
 ##########
-P0.0
-P0.1
-P0.2
-P0.3
-P0.4
-P0.5
-P0.6
+P0.0	Ampel Rot		### Beidseitig
+P0.1	Ampel Orange		### Beidseitig
+P0.2	Ampel Grün		### Beidseitig
+P0.3	Fußgängerampel Rot	### Beidseitig
+P0.4	Fußgängerampel Grün	### Beidseitig
+P0.5	Blinklicht (Rot)
+P0.6	Glocke
 P0.7
 
 ##########
-### P1 ###
+### P1 ###	Mechanik/Schaltung
 ##########
-P1.0
-P1.1
-P1.2
-P1.3
+P1.0	Zähler 1	### Achsenzähler zum schließen der Schranken
+P1.1	Zähler 2	### Achsenzähler zum öffnen der Schranken
+P1.2	Servo 1		### Schrankenmotor
+P1.3	Servo 2		### Schrankenmotor
 P1.4
-P1.5
+P1.5	Not-Aus Servos	### Sicherheitseinrichtung bei Schrankendefekt
 P1.6
 P1.7
 
@@ -35,7 +35,7 @@ P2.6
 P2.7
 
 ##########
-### P3 ###
+### P3 ###	misc
 ##########
 P3.0
 P3.1
@@ -44,4 +44,4 @@ P3.3
 P3.4
 P3.5
 P3.6
-P3.7
+P3.7	Output Ampel
