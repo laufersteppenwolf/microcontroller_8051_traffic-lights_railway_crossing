@@ -1,9 +1,9 @@
 LED Rot                   http://www.conrad.de/ce/de/product/180162/LED-bedrahtet-Rot-Rund-3-mm-150-mcd-60-20-mA-185-V-Kingbright-L-934SRD-D?ref=searchDetail
 LED Grün                  http://www.conrad.de/ce/de/product/759486/LED-bedrahtet-Hell-Gruen-Rund-3-mm-120-mcd-40-30-mA-21-V-Wuerth-Elektronik-151031VS04000?ref=searchDetail
 LED Orange                http://www.conrad.de/ce/de/product/156229/LED-bedrahtet-Gelb-Orange-Rund-3-mm-110-mcd-40-20-mA-2-V-Everlight-Opto-264-7UYCS530-A2?ref=searchDetail
-Wiederstand Rot           http://www.conrad.de/ce/de/product/407429/Metallschicht-Widerstand-158-axial-bedrahtet-0207-06-W-1-St?ref=searchDetail
-Wiederstand Grün          http://www.conrad.de/ce/de/product/405132/Kohleschicht-Widerstand-100-axial-bedrahtet-0411-05-W-1-St?ref=searchDetail
-Wiederstand Orange        http://www.conrad.de/ce/de/product/405159/Kohleschicht-Widerstand-150-axial-bedrahtet-0411-05-W-1-St?ref=searchDetail
+Widerstand Rot            http://www.conrad.de/ce/de/product/407429/Metallschicht-Widerstand-158-axial-bedrahtet-0207-06-W-1-St?ref=searchDetail
+Widerstand Grün           http://www.conrad.de/ce/de/product/405132/Kohleschicht-Widerstand-100-axial-bedrahtet-0411-05-W-1-St?ref=searchDetail
+Widerstand Orange         http://www.conrad.de/ce/de/product/405159/Kohleschicht-Widerstand-150-axial-bedrahtet-0411-05-W-1-St?ref=searchDetail
 Reflexoptokoppler         http://www.conrad.de/ce/de/product/399631/Miniatur-Reflexlichtschranke-Kondenshi-Auk-SG128IR-Optoelektronischer-Reflexkoppler-Reichweite-8-mm?ref=searchDetail
 Servo                     http://www.conrad.de/ce/de/product/275460/Modelcraft-Micro-Servo-MC1811-MODELCRAFT-Micro-Servo-MC1811-Gleitlager-Getriebe-Kunststoff-JR/?ref=home&rt=home&rb=1
 Taster                    http://www.conrad.de/ce/de/product/705349/Drucktaster-Print-Taster-12-VDC-005-A-1-x-AusEin-Diptronics-DTS-644R-Vtastend-1-St?ref=searchDetail
