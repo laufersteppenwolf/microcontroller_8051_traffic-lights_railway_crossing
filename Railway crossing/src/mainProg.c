@@ -1,0 +1,131 @@
+/************************************************************************************
+* Main program for Railway crossing                                                 *
+*                                                                                   *
+*                                                                                   *
+* Author: Stefan Zimmer                                                             *
+************************************************************************************/
+
+#include <at89c5131.h> 
+
+void sleep1 (int seconds);
+void sleep2 (int milliseconds);
+void init (void);
+void orange (void);
+void red (void);
+void orangeRed (void);
+void green (void);
+
+// #define RIDE_DEBUGGER
+#define DEBUG
+
+void main (void) {
+unsigned int counter, orangeCounter, greenCounter;
+unsigned char isOrange, isRed, isOrangeRed, wasSet;
+    init();
+    isOrange = 0;
+    isRed = 0;
+    counter = 0;
+    wasSet = 0;
+
+#ifdef RIDE_DEBUGGER
+P3 = 0;
+#endif
+
+    while (1) {
+#ifdef DEBUG    
+        P2 = counter;
+#endif        
+        if (P3_2 == 1) {
+            counter++;
+            sleep2 (100);
+            while (P3_2 == 1) {};   //loop to count only once per click
+        }
+        if (P3_3 == 1) {
+            counter--;
+            sleep2 (100);
+            while (P3_3 == 1) {};   //loop to count only once per click
+        }
+        if (counter != 0) {
+        wasSet = 1;
+            if ((isOrange == 1 || isRed == 1) && orangeCounter == 40) {
+                sleep2(100);
+                red();
+                    isOrange = 0;
+                    isRed = 1; 
+            } else if (isOrange == 0) {
+                orange();
+                sleep2(100);
+                    orangeCounter = 1;
+                    isOrange = 1;            
+                
+            } else if (isOrange == 1 && orangeCounter <= 39) {
+                sleep2(100);
+                orangeCounter++;
+                
+            }
+
+
+        }
+        if (counter == 0 && wasSet == 1) {
+             if (isOrangeRed == 1 && greenCounter == 40) {
+                sleep2(100);
+                green();        //break;
+                    isOrangeRed = 0;
+                    greenCounter = 0;
+                    orangeCounter = 0;
+             
+            }else if (isRed == 1) {
+                orangeRed();
+                sleep2(100);
+                    greenCounter = 1;
+                    isOrangeRed = 1;
+                    isRed = 0;
+            
+            } else if (isOrangeRed == 1 && greenCounter <= 39) {
+                sleep2(100);
+                greenCounter++;
+            }
+        }
+
+    }
+}
+
+
+
+void init (void) {
+    P0 = 0;              // All lights off
+#ifdef DEBUG
+    P2 = 0;
+#endif
+    P0 = 20;     // Green ligts  (00010100 bits)
+}
+
+void sleep1 (int seconds)
+{
+unsigned int i;                         // 16-Bit-variable for time input
+unsigned int c1,c2;                     // 16-Bit-variables for 1-second-pause
+for (i=seconds;i!=0;i--)                // input-based pause
+    for (c1=0x01E6;c1!=0;c1--)          // 1-second-pause
+        for (c2=0x00FF;c2!=0;c2--);
+}
+
+void sleep2 (int milliseconds) {
+unsigned int i;                         // 16-Bit-variable for time input
+unsigned int c1   ;                     // 16-Bit-variable for 1-millisecond-pause
+for (i=milliseconds;i!=0;i--)          // input-based pause
+    for (c1=0x00C8;c1!=0;c1--);          // 1-millisecond-pause
+}
+void orange (void) {
+    P0 = 10;        // 00001010 bits
+}
+void red (void) {
+    P0 = 9;    // 00001001 bits
+}
+
+void orangeRed (void) {
+    P0 = (9 | 10);
+}
+
+void green (void) {
+    P0 = 20;
+}
