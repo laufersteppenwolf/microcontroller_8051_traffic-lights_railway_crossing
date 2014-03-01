@@ -40,7 +40,7 @@ P3 = 0;
             sleep2 (100);
             while (P3_2 == 1) {};   //loop to count only once per click
         }
-        if (P3_3 == 1) {
+        if (P3_3 == 1 && counter != 0) {
             counter--;
             sleep2 (100);
             while (P3_3 == 1) {};   //loop to count only once per click
