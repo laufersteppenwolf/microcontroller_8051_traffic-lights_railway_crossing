@@ -213,3 +213,18 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
+
+#RIDE
+*.mac
+*.LST
+*.obj
+*.AOF
+*.bin
+*.ctx
+*.dbi
+*.M51
+*.rapp
+*.xdb
+*.XRF
+*.xml
+*.STANDARD*
