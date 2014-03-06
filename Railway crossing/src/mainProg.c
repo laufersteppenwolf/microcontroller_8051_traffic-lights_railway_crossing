@@ -16,7 +16,9 @@ void orangeRed (void);
 void green (void);
 
 // #define RIDE_DEBUGGER
-#define DEBUG
+// #define DEBUG
+#define SENSOR_UP P1_1
+#define SENSOR_DOWN P1_0
 
 void main (void) {
 unsigned int counter, orangeCounter, greenCounter;
@@ -86,7 +88,14 @@ P3 = 0;
                 greenCounter++;
             }
         }
-
+        if (counter == 0) {
+            P2_0 = 0;
+            if (SENSOR_UP == 1) {
+                P2_1 = 0;
+            } else if (SENSOR_UP == 0) {
+                P2_1 = 1;
+            }
+        }
     }
 }
 
@@ -94,9 +103,8 @@ P3 = 0;
 
 void init (void) {
     P0 = 0;              // All lights off
-#ifdef DEBUG
-    P2 = 0;
-#endif
+    P2_0 = 0;
+    P2_1 = 0;
     P0 = 20;     // Green ligts  (00010100 bits)
 }
 
@@ -120,6 +128,12 @@ void orange (void) {
 }
 void red (void) {
     P0 = 9;    // 00001001 bits
+    P2_1 = 0;
+    if ( SENSOR_DOWN == 1) {
+        P2_0 = 0;
+    } else if (SENSOR_DOWN == 0) {
+        P2_0 = 1;
+    }
 }
 
 void orangeRed (void) {
