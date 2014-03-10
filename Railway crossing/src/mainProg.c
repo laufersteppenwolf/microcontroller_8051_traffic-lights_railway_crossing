@@ -6,19 +6,13 @@
 ************************************************************************************/
 
 #include <at89c5131.h> 
-
-void sleep1 (int seconds);
-void sleep2 (int milliseconds);
-void init (void);
-void orange (void);
-void red (void);
-void orangeRed (void);
-void green (void);
+#include <mainProg.h>
 
 // #define RIDE_DEBUGGER
 // #define DEBUG
-#define SENSOR_UP P1_1
-#define SENSOR_DOWN P1_0
+
+// #define SENSOR_UP P1_1       from include
+// #define SENSOR_DOWN P1_0     from include
 
 void main (void) {
 unsigned int counter, orangeCounter, greenCounter;
@@ -101,13 +95,6 @@ P3 = 0;
 
 
 
-void init (void) {
-    P0 = 0;              // All lights off
-    P2_0 = 0;
-    P2_1 = 0;
-    P0 = 20;     // Green ligts  (00010100 bits)
-}
-
 void sleep1 (int seconds)
 {
 unsigned int i;                         // 16-Bit-variable for time input
@@ -122,24 +109,4 @@ unsigned int i;                         // 16-Bit-variable for time input
 unsigned int c1   ;                     // 16-Bit-variable for 1-millisecond-pause
 for (i=milliseconds;i!=0;i--)          // input-based pause
     for (c1=0x00C8;c1!=0;c1--);          // 1-millisecond-pause
-}
-void orange (void) {
-    P0 = 10;        // 00001010 bits
-}
-void red (void) {
-    P0 = 9;    // 00001001 bits
-    P2_1 = 0;
-    if ( SENSOR_DOWN == 1) {
-        P2_0 = 0;
-    } else if (SENSOR_DOWN == 0) {
-        P2_0 = 1;
-    }
-}
-
-void orangeRed (void) {
-    P0 = (9 | 10);
-}
-
-void green (void) {
-    P0 = 20;
 }
