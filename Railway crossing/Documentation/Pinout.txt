@@ -25,11 +25,11 @@ P1.7
 ##########
 ### P2 ###
 ##########
-P2.0
-P2.1
+P2.0	Motor 1
+P2.1	Motor 2
 P2.2
-P2.3
-P2.4
+P2.3	Reflexoptokoppler 1
+P2.4	Reflexoptokoppler 2
 P2.5
 P2.6
 P2.7
