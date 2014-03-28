@@ -15,8 +15,16 @@
 // #define SENSOR_DOWN P1_0     from include
 
 void main (void) {
-unsigned int counter, orangeCounter, greenCounter;
-unsigned char isOrange, isRed, isOrangeRed, wasSet;
+unsigned int \
+                counter, \
+                orangeCounter, \
+                greenCounter;
+unsigned char \
+                isOrange, \
+                isRed, \
+                isOrangeRed, \
+                wasSet;
+
     init();
     isOrange = 0;
     isRed = 0;
