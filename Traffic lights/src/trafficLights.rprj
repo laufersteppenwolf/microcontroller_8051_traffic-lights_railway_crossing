@@ -1,4 +1,4 @@
 
 <Project Header="Project 'trafficLights'" Path=".\trafficLights.rprj" Project="Yes" OutputFile="" sate="96" ActiveApp="trafficLights" >
-	<ApplicationBuild Header="trafficLights" Extern=".\trafficLights.rapp" Path=".\trafficLights.rapp" OutputFile=".\trafficLights.aof" sate="98" />
+	<ApplicationBuild Header="trafficLights" Extern=".\trafficLights.rapp" Path=".\trafficLights.rapp" OutputFile=".\trafficLights.aof" sate="96" />
 </Project>

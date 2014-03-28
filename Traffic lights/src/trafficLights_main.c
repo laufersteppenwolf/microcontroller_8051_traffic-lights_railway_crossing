@@ -14,6 +14,7 @@
 ************************************************************************************/
 
 #include <at89c5131.h> 
+#include <trafficLights.h>
 
 #define DEBUGGER
 
@@ -24,15 +25,6 @@
 
 #define RAILWAY_INPUT P3_7
 
-
-/**** declarations ****/
-void init (void);
-void orangeRed (unsigned char lane);
-void green (unsigned char lane);
-void orange (unsigned char lane);
-void error (void);
-void allRed (void);
-void sleep (int seconds);
 
 /**** main program ****/
 void main (void) 
