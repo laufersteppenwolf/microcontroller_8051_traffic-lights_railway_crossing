@@ -1,4 +1,4 @@
 
 <Project Header="Project 'RailwayCrossing'" Path=".\RailwayCrossing.rprj" Project="Yes" OutputFile="" sate="96" ActiveApp="RailwayCrossing" >
-	<ApplicationBuild Header="RailwayCrossing" Extern=".\RailwayCrossing.rapp" Path=".\RailwayCrossing.rapp" OutputFile=".\RailwayCrossing.aof" sate="96" />
+	<ApplicationBuild Header="RailwayCrossing" Extern=".\RailwayCrossing.rapp" Path=".\RailwayCrossing.rapp" OutputFile=".\RailwayCrossing.aof" sate="98" />
 </Project>
