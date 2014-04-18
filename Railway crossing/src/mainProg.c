@@ -32,7 +32,7 @@ unsigned char \
     init();
     isOrange = 0;
     isRed = 0;
-    counter = 1;
+    counter = 0;
     counter2 = 0;
     wasSet = 0;
 
