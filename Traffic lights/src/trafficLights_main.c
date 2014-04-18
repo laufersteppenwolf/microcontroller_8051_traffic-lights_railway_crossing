@@ -7,7 +7,7 @@
 * P3    misc                                                                        *
 *                                                                                   *
 * If P3_7 == 1, block lane 1, as the railway crossing is closed                     *
-* If (P3_0 == 1 && P3_1 == 1), pushbutton3 = 1                                      *
+* If (P3_0 == 1 && P3_1 == 1), pushbutton4 = 1                                      *
 *                                                                                   *
 *                                                                                   *
 * Author: Stefan Zimmer                                                             *
@@ -25,10 +25,20 @@
 
 #define RAILWAY_INPUT P3_7
 
+struct footb 
+{   char *w1;
+    char *w2;
+    char *w3;
+    char *w4;
+};
+
+struct footb get_pb(struct footb *test);
 
 /**** main program ****/
 void main (void) 
 {
+struct footb *test = {0, 0, 0, 0} ;
+
 unsigned char lane;
 P0 = 0;         // make sure everything's off
 P1 = 0;         // make sure everything's off
@@ -43,7 +53,7 @@ sleep (2);
 #endif
 
 init();
-
+get_pb(&test);
 #ifndef DEBUGGER
 sleep (2);
 #endif
@@ -53,20 +63,29 @@ sleep (2);
     {   //lane = 2;
         lane++;
         orangeRed(lane);
-        sleep (1);  // 4
+        sleep (1, &test);  // 4
         green(lane);
-        sleep (1);  // 20
+        sleep (1, &test);  // 20
         orange(lane);
-        sleep (1);  // 4
+        sleep (1, &test);  // 4
         allRed ();
-        sleep (1);  // 4
+        sleep (1, &test);  // 4
         if (lane == 4 && RAILWAY_INPUT == 0) {
             lane = 0;
-        } else if (lane == 4 && RAILWAY_INPUT == 1) {
+        } else if (lane == 4 && RAILWAY_INPUT == 1) {   
             lane = 1;
         }  
     }
 }
+
+struct footb get_pb(struct footb *test) {   // get pushbuttons
+    if (P3_0 == 1) *test->w1 = 1;
+    if (P3_1 == 1) *test->w2 = 1;
+    if (P3_2 == 1) *test->w3 = 1;
+    if (P3_0 == 1 && P3_1 == 1) *test->w4 = 1;
+    return *test;
+}
+
 
 void init(void) {   // make sure everything's red
 
@@ -185,19 +204,21 @@ while (1) {
     P0 = 0;
     P1 = 0;
     P2 = 0;
-    sleep(1);
+    sleep(1, 0);
     P0 = 255;
     P1 = 255;
     P2 = 255;
-    sleep(1);
+    sleep(1, 0);
 }
 }
 
-void sleep (int seconds)
-{
+struct footb sleep (int seconds, struct footb *test) {
 unsigned int i;                         // 16-Bit-variable for time input
 unsigned int c1,c2;                     // 16-Bit-variables for 1-second-pause
 for (i=seconds;i!=0;i--)                // input-based pause
-    for (c1=0x01E7;c1!=0;c1--)          // 1-second-pause
+    for (c1=0x01E7;c1!=0;c1--){          // 1-second-pause
         for (c2=0x00FF;c2!=0;c2--);
+        get_pb(&test);
+    }
+return *test;
 }

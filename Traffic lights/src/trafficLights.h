@@ -7,4 +7,5 @@ void green (unsigned char lane);
 void orange (unsigned char lane);
 void error (void);
 void allRed (void);
-void sleep (int seconds);
+struct footb sleep (int seconds, struct footb *test);
+
