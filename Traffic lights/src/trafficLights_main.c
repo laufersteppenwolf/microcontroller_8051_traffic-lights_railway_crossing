@@ -25,6 +25,11 @@
 #define LANE3 3
 #define LANE4 4
 
+#define FOOT1 P3_3
+#define FOOT2 P3_4
+#define FOOT3 P3_5
+#define FOOT4 P3_6
+
 #define RAILWAY_INPUT P3_7
 
 struct footb 
@@ -77,6 +82,11 @@ RAILWAY_INPUT = 0;
         sleep (1, &test);   // 4
         allRed ();
         sleep (1, &test);   // 4
+        if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w3 == 1) || ( lane == 4 && *test->w4 == 1) ) {
+            foot (lane, 1);
+            sleep (1, &test);   // 4
+            foot (lane, 0);
+            }
         if (lane == 4 && RAILWAY_INPUT == 0) {
             lane = 0;
         } else if (lane == 4 && RAILWAY_INPUT == 1) {   
@@ -196,6 +206,31 @@ void orange (unsigned char lane)
             P2_1 = 0;
             P1_0 = 1;   // turn on orange
             P1_1 = 1;
+            break;
+        default:
+            error();
+            break;
+    }
+}
+
+void foot (unsigned char lane, unsigned char green)
+{
+    switch (lane) {
+        case LANE2: 
+            if ( green == 1) FOOT2 = 1;
+            else FOOT2 = 0;
+            break;
+        case LANE3:
+            if ( green == 1) FOOT3 = 1;
+            else FOOT3 = 0;            
+            break;
+        case LANE4:
+            if ( green == 1) FOOT4 = 1;
+            else FOOT4 = 0;            
+            break;
+        case LANE1:
+            if ( green == 1) FOOT1 = 1;
+            else FOOT1 = 0;            
             break;
         default:
             error();
