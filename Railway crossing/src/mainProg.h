@@ -12,9 +12,7 @@ void orangeRed (void);
 
 void init (void) {
     P0 = 0;              // All lights off
-    P2_0 = 0;
-    P2_1 = 0;
-    P2_7 = 0;
+    P2 = 0;
     P0 = 20;     // Green ligts  (00010100 bits)
 }
 
