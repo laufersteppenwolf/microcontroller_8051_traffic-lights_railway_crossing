@@ -18,12 +18,13 @@
 
 // #define DEBUGGER
 
-// #define IGNORE_RAILWAY
+#define IGNORE_RAILWAY
+#define IGNORE_WALKER_INPUT
 
-#define LANE1 1
-#define LANE2 2
-#define LANE3 3
-#define LANE4 4
+#define LANE1 2
+#define LANE2 3
+#define LANE3 4
+#define LANE4 1
 
 #define FOOT1 P3_3
 #define FOOT2 P3_4
@@ -50,10 +51,6 @@ unsigned char lane;
 P0 = 0;         // make sure everything's off
 P1 = 0;         // make sure everything's off
 P2 = 0;         // make sure everything's off
-P3_3 = 0;       // make sure everything's off
-P3_4 = 0;       // make sure everything's off
-P3_5 = 0;       // make sure everything's off
-P3_6 = 0;       // make sure everything's off
 
 #ifndef DEBUGGER
 sleep (2, &test);
@@ -61,6 +58,11 @@ sleep (2, &test);
 
 init();
 get_pb(&test);
+
+FOOT1 = 0;
+FOOT2 = 0;
+FOOT3 = 0;
+FOOT4 = 0;
 
 #ifndef DEBUGGER
 sleep (2, &test);
@@ -70,10 +72,17 @@ sleep (2, &test);
 RAILWAY_INPUT = 0;
 #endif
 
-
     while (1)               // loop main prog
-    {   //lane = 2;
+    {   
+
+#ifdef IGNORE_WALKER_INPUT
+        *test->w1 = 1;
+        *test->w2 = 1;
+        *test->w3 = 1;
+        *test->w4 = 1;
+#endif    
         lane++;
+        sleep (1, &test);
         orangeRed(lane);
         sleep (1, &test);   // 4
         green(lane);
@@ -81,12 +90,16 @@ RAILWAY_INPUT = 0;
         orange(lane);
         sleep (1, &test);   // 4
         allRed ();
-        sleep (1, &test);   // 4
-        if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w3 == 1) || ( lane == 4 && *test->w4 == 1) ) {
+        sleep (1, &test);   // 4 
+//        if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w3 == 1) || ( lane == 4 && *test->w4 == 1) ) {
             foot (lane, 1);
             sleep (1, &test);   // 4
             foot (lane, 0);
-            }
+//            if (lane == 1) *test->w1 = 0;
+//            else if (lane == 2) *test->w2 = 0;
+//            else if (lane == 3) *test->w3 = 0;
+//            else if (lane == 4) *test->w4 = 0; 
+//            }
         if (lane == 4 && RAILWAY_INPUT == 0) {
             lane = 0;
         } else if (lane == 4 && RAILWAY_INPUT == 1) {   
