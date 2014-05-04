@@ -11,11 +11,22 @@
 // #define RIDE_DEBUGGER
 // #define DEBUG
 
-// #define SENSOR_UP P1_1       from include
-// #define SENSOR_DOWN P1_0     from include
+#define SENSOR_UP P1_1
+#define SENSOR_DOWN P1_0
 
-#define BLINK_LED P2_7      // FIXME: Use the correct port
-#define BLINK_TIMING 6
+#define SENSOR_1        P3_2
+#define SENSOR_2        P3_3
+
+#define GONG            P2_0
+#define BLINK_LED       P2_1
+#define BLINK_TIMING    6
+
+#define BARRIER_DOWN    P2_6
+#define BARRIER_UP      P2_7
+
+#define RED             P2_4
+#define ORANGE          P2_3
+#define GREEN           P2_2
 
 void main (void) {
 unsigned int \
@@ -40,20 +51,19 @@ unsigned char \
 P3 = 0;
 #endif
 
-    while (1) {
-
-#ifdef DEBUG    
-        P2 = counter;
-#endif        
-        if (P3_2 == 1) {
+    while (1) { 
+#ifdef DEBUG
+    P0 = counter
+#endif    
+        if (SENSOR_1 == 1) {
             counter++;
             sleep2 (100);
-            while (P3_2 == 1) {};   //loop to count only once per click
+            while (SENSOR_1 == 1) {};   //loop to count only once per click
         }
-        if (P3_3 == 1 && counter != 0) {
+        if (SENSOR_2 == 1 && counter != 0) {
             counter--;
             sleep2 (100);
-            while (P3_3 == 1) {};   //loop to count only once per click
+            while (SENSOR_2 == 1) {};   //loop to count only once per click
         }
         if (counter != 0) {
         wasSet = 1;
@@ -99,11 +109,11 @@ P3 = 0;
             }
         }
         if (counter == 0) {
-            P2_0 = 0;
+            BARRIER_DOWN = 0;
             if (SENSOR_UP == 1) {
-                P2_1 = 0;
+                BARRIER_UP = 0;
             } else if (SENSOR_UP == 0) {
-                P2_1 = 1;
+                BARRIER_UP = 1;
             }
         }
         
@@ -113,17 +123,21 @@ P3 = 0;
 
 
 void red (int counter2) {
-    P0 = 9;    // 00001001 bits
-    P2_1 = 0;
+    RED = 1;
+    ORANGE = 0;
+    GREEN = 0;
+    BARRIER_UP = 0;
     if ( SENSOR_DOWN == 1) {
-        P2_0 = 0;
+        BARRIER_DOWN = 0;
     } else if (SENSOR_DOWN == 0) {
-        P2_0 = 1;
+        BARRIER_DOWN = 1;
     }
     if (BLINK_LED == 0 && counter2 >= BLINK_TIMING ) {
         BLINK_LED = 1;
+        GONG = 1;
     } else if (BLINK_LED == 1 && counter2 >= BLINK_TIMING ){
         BLINK_LED = 0;
+        GONG = 0;
     }
 }
 
@@ -143,6 +157,26 @@ for (i=milliseconds;i!=0;i--)          // input-based pause
 }
 
 void orangeRed (void) {
-    P0 = (9 | 10);
+    RED = 1;
+    ORANGE = 1;
+    GREEN = 0;
     BLINK_LED = 0;                      // reset in case it was set
+}
+
+void init (void) {
+    P0 = 0;              // All lights off
+    P2 = 0;
+    green();            // Green ligts  (00010100 bits)
+}
+
+void orange (void) {
+    RED = 0;
+    ORANGE = 1;
+    GREEN = 0;
+}
+
+void green (void) {
+    RED = 0;
+    ORANGE = 0;
+    GREEN = 1;
 }
