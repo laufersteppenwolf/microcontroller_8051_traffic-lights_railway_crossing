@@ -18,8 +18,8 @@
 
 // #define DEBUGGER
 
-#define IGNORE_RAILWAY
-#define IGNORE_WALKER_INPUT
+//#define IGNORE_RAILWAY
+//#define IGNORE_WALKER_INPUT
 
 #define LANE1 2
 #define LANE2 3
@@ -91,15 +91,15 @@ RAILWAY_INPUT = 0;
         sleep (1, &test);   // 4
         allRed ();
         sleep (1, &test);   // 4 
-//        if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w3 == 1) || ( lane == 4 && *test->w4 == 1) ) {
+        if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w3 == 1) || ( lane == 4 && *test->w4 == 1) ) {
             foot (lane, 1);
             sleep (1, &test);   // 4
             foot (lane, 0);
-//            if (lane == 1) *test->w1 = 0;
-//            else if (lane == 2) *test->w2 = 0;
-//            else if (lane == 3) *test->w3 = 0;
-//            else if (lane == 4) *test->w4 = 0; 
-//            }
+            if (lane == 1) *test->w1 = 0;
+            else if (lane == 2) *test->w2 = 0;
+            else if (lane == 3) *test->w3 = 0;
+            else if (lane == 4) *test->w4 = 0; 
+            }
         if (lane == 4 && RAILWAY_INPUT == 0) {
             lane = 0;
         } else if (lane == 4 && RAILWAY_INPUT == 1) {   
@@ -121,10 +121,10 @@ struct footb get_pb(struct footb *test) // get pushbuttons
 void init(void)    // make sure everything's red
 {
     P0 = 0xFF;
-    P3_3 = 1;
-    P3_4 = 1;
-    P3_5 = 1;
-    P3_6 = 1;
+    P3_3 = 0;
+    P3_4 = 0;
+    P3_5 = 0;
+    P3_6 = 0;
 }
 
 void orangeRed (unsigned char lane) 
