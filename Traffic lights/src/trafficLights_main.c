@@ -19,7 +19,8 @@
 // #define DEBUGGER
 
 //#define IGNORE_RAILWAY
-//#define IGNORE_WALKER_INPUT
+#define IGNORE_WALKER_INPUT         // FIXME: Fix short on ext. board
+//#define IGNORE_WALKER_INPUT_A
 
 #define LANE1 2
 #define LANE2 3
@@ -73,14 +74,7 @@ RAILWAY_INPUT = 0;
 #endif
 
     while (1)               // loop main prog
-    {   
-
-#ifdef IGNORE_WALKER_INPUT
-        *test->w1 = 1;
-        *test->w2 = 1;
-        *test->w3 = 1;
-        *test->w4 = 1;
-#endif    
+    {      
         lane++;
         *test = sleep (1, &test);
         orangeRed(lane);
@@ -91,15 +85,31 @@ RAILWAY_INPUT = 0;
         *test = sleep (1, &test);   // 4
         allRed ();
         *test = sleep (1, &test);   // 4 
-        if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w3 == 1) || ( lane == 4 && *test->w4 == 1) ) {
+#ifdef IGNORE_WALKER_INPUT_A
+        *test->w1 = 1;
+        *test->w2 = 1;
+        *test->w3 = 1;
+        *test->w4 = 1;
+#endif    
+
+#ifndef IGNORE_WALKER_INPUT
+        if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w2 == 1) || ( lane == 4 && *test->w4 == 1) ) {
+#else
+        if (1) {
+#endif
             foot (lane, 1);
-            *test = sleep (1, &test);   // 4
+            sleep (1, &test);   // 4
             foot (lane, 0);
-            *test = sleep (1, &test);
+            sleep (1, &test);
+            
+#ifndef IGNORE_WALKER_INPUT_A
+#ifndef IGNORE_WALKER_INPUT
             if (lane == 1) *test->w1 = 0;
-            else if (lane == 2) *test->w2 = 0;
-            else if (lane == 3) *test->w3 = 0;
-            else if (lane == 4) *test->w4 = 0; 
+            if (lane == 2) *test->w2 = 0;
+            if (lane == 3) *test->w2 = 0;
+            if (lane == 4) *test->w4 = 0;
+#endif
+#endif
             }
         if (lane == 4 && RAILWAY_INPUT == 0) {
             lane = 0;
