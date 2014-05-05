@@ -53,11 +53,11 @@ P1 = 0;         // make sure everything's off
 P2 = 0;         // make sure everything's off
 
 #ifndef DEBUGGER
-sleep (2, &test);
+*test = sleep (2, &test);
 #endif
 
 init();
-get_pb(&test);
+*test = get_pb(&test);
 
 FOOT1 = 0;
 FOOT2 = 0;
@@ -65,7 +65,7 @@ FOOT3 = 0;
 FOOT4 = 0;
 
 #ifndef DEBUGGER
-sleep (2, &test);
+*test = sleep (2, &test);
 #endif
 
 #ifdef IGNORE_RAILWAY
@@ -82,19 +82,20 @@ RAILWAY_INPUT = 0;
         *test->w4 = 1;
 #endif    
         lane++;
-        sleep (1, &test);
+        *test = sleep (1, &test);
         orangeRed(lane);
-        sleep (1, &test);   // 4
+        *test = sleep (1, &test);   // 4
         green(lane);
-        sleep (1, &test);   // 20
+        *test = sleep (1, &test);   // 20
         orange(lane);
-        sleep (1, &test);   // 4
+        *test = sleep (1, &test);   // 4
         allRed ();
-        sleep (1, &test);   // 4 
+        *test = sleep (1, &test);   // 4 
         if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w3 == 1) || ( lane == 4 && *test->w4 == 1) ) {
             foot (lane, 1);
-            sleep (1, &test);   // 4
+            *test = sleep (1, &test);   // 4
             foot (lane, 0);
+            *test = sleep (1, &test);
             if (lane == 1) *test->w1 = 0;
             else if (lane == 2) *test->w2 = 0;
             else if (lane == 3) *test->w3 = 0;
