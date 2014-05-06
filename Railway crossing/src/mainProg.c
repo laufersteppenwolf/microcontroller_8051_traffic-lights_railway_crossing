@@ -11,6 +11,7 @@
 // #define RIDE_DEBUGGER
 // #define DEBUG
 
+#define GONG_SWITCH     P1_2
 #define SENSOR_UP P1_1
 #define SENSOR_DOWN P1_0
 
@@ -24,8 +25,10 @@
 #define BARRIER_DOWN    P2_6
 #define BARRIER_UP      P2_7
 
+#define TL_OUT          P2_5
+
 #define RED             P2_4
-#define ORANGE          P2_3
+#define ORANGE          P1_7
 #define GREEN           P2_2
 
 void main (void) {
@@ -126,6 +129,7 @@ void red (int counter2) {
     RED = 1;
     ORANGE = 0;
     GREEN = 0;
+    TL_OUT = 1;
     BARRIER_UP = 0;
     if ( SENSOR_DOWN == 1) {
         BARRIER_DOWN = 0;
@@ -134,7 +138,11 @@ void red (int counter2) {
     }
     if (BLINK_LED == 0 && counter2 >= BLINK_TIMING ) {
         BLINK_LED = 1;
+        if (GONG_SWITCH == 1) {
         GONG = 1;
+        } else {
+        GONG = 0;
+        }
     } else if (BLINK_LED == 1 && counter2 >= BLINK_TIMING ){
         BLINK_LED = 0;
         GONG = 0;
@@ -161,12 +169,14 @@ void orangeRed (void) {
     ORANGE = 1;
     GREEN = 0;
     BLINK_LED = 0;                      // reset in case it was set
+    TL_OUT = 0;
 }
 
 void init (void) {
     P0 = 0;              // All lights off
     P2 = 0;
-    green();            // Green ligts  (00010100 bits)
+    green();            // Green ligts
+    TL_OUT = 0;
 }
 
 void orange (void) {
