@@ -49,16 +49,16 @@ void main (void)
 struct footb *test = {0, 0, 0, 0} ;
 
 unsigned char lane;
-P0 = 0;         // make sure everything's off
-P1 = 0;         // make sure everything's off
-P2 = 0;         // make sure everything's off
+P0 = 0;                                 // make sure everything's off
+P1 = 0;                                 // make sure everything's off
+P2 = 0;                                 // make sure everything's off
 
 #ifndef DEBUGGER
 *test = sleep (1, &test);
 #endif
 
 init();
-*test = get_pb(&test);
+*test = get_pb(&test);                  // Get the initial state of the walker-pushbuttons
 
 FOOT1 = 0;
 FOOT2 = 0;
@@ -73,36 +73,36 @@ FOOT4 = 0;
 RAILWAY_INPUT = 0;
 #endif
 
-    while (1)               // loop main prog
+    while (1)
     {      
-        lane++;
-        *test = sleep (1, &test);
-        orangeRed(lane);
+        lane++;                         // Increase the lane (was 0 on init)
+        *test = sleep (1, &test);       // Let's pause some time
+        orangeRed(lane);                // Turn on red and orange on "lane"
         *test = sleep (3, &test);
-        green(lane);
+        green(lane);                    // Turn on green on "lane"
         *test = sleep (20, &test);
-        orange(lane);
+        orange(lane);                   // Turn on orange on "lane"
         *test = sleep (4, &test);
-        allRed ();
+        allRed ();                      // Turn on all red lights
         *test = sleep (2, &test);
-#ifdef IGNORE_WALKER_INPUT_A
+#ifdef IGNORE_WALKER_INPUT_A            // Hardcode the pb inputs for debugging purposes
         *test->w1 = 1;
         *test->w2 = 1;
         *test->w3 = 1;
         *test->w4 = 1;
 #endif    
 
-#ifndef IGNORE_WALKER_INPUT
+#ifndef IGNORE_WALKER_INPUT             // Temp workaround to avoid the panic/crash
         if ( ( lane == 1 && *test->w1 == 1) || ( lane == 2 && *test->w2 == 1) || ( lane == 3 && *test->w2 == 1) || ( lane == 4 && *test->w4 == 1) ) {
 #else
         if (1) {
 #endif
-            foot (lane, 1);
-            sleep (5, &test);   // 4
-            foot (lane, 0);
+            foot (lane, 1);             // Turn on green for the walkers on lane "lane"
+            sleep (5, &test);
+            foot (lane, 0);             // Turn the green lights off again
             sleep (1, &test);
             
-#ifndef IGNORE_WALKER_INPUT_A
+#ifndef IGNORE_WALKER_INPUT_A           // Reset the pb status of the current lane, as we just turned green on
 #ifndef IGNORE_WALKER_INPUT
             if (lane == 1) *test->w1 = 0;
             if (lane == 2) *test->w2 = 0;
@@ -111,7 +111,7 @@ RAILWAY_INPUT = 0;
 #endif
 #endif
             }
-        if (lane == 4 && RAILWAY_INPUT == 0) {
+        if (lane == 4 && RAILWAY_INPUT == 0) {          // Skip lane 1 in case the railway crossing is closed
             lane = 0;
         } else if (lane == 4 && RAILWAY_INPUT == 1) {   
             lane = 1;
@@ -119,7 +119,7 @@ RAILWAY_INPUT = 0;
     }
 }
 
-struct footb get_pb(struct footb *test) // get pushbuttons
+struct footb get_pb(struct footb *test)                 // Get the pushbuttons' statuses
 {   
     if (P3_0 == 1 && P3_1 == 0) *test->w1 = 1;
     if (P3_1 == 1 && P3_0 == 0) *test->w2 = 1;
@@ -129,7 +129,7 @@ struct footb get_pb(struct footb *test) // get pushbuttons
 }
 
 
-void init(void)    // make sure everything's red
+void init(void)                                         // Make sure everything's red
 {
     P0 = 0xFF;
     P3_3 = 0;
@@ -138,7 +138,7 @@ void init(void)    // make sure everything's red
     P3_6 = 0;
 }
 
-void orangeRed (unsigned char lane) 
+void orangeRed (unsigned char lane)     // Turn on orange and red on lane "lane"
 {
     switch (lane) {
         case LANE2:    
@@ -158,7 +158,7 @@ void orangeRed (unsigned char lane)
             P1_1 = 1;
             break;
         default:
-            error();
+            error();            // Panic if something went wrong
             break;
     }
 }
@@ -167,39 +167,39 @@ void green (unsigned char lane)
 {
     switch (lane) {
         case LANE2:    
-            P0_2 = 0;   // turn off red and orange
+            P0_2 = 0;           // Turn off red and orange
             P0_3 = 0;
             P1_2 = 0;
             P1_3 = 0;
-            P2_2 = 1;   // turn on green
+            P2_2 = 1;           // Turn on green
             P2_3 = 1;
             break;
         case LANE3:
-            P0_4 = 0;   // turn off red and orange
+            P0_4 = 0;           // Turn off red and orange
             P0_5 = 0;
             P1_4 = 0;
             P1_5 = 0;
-            P2_4 = 1;   // turn on green
+            P2_4 = 1;           // Turn on green
             P2_5 = 1;
             break;
         case LANE4:
-            P0_6 = 0;   // turn off red and orange
+            P0_6 = 0;           // Turn off red and orange
             P0_7 = 0;
             P1_6 = 0;
             P1_7 = 0;
-            P2_6 = 1;   // turn on green
+            P2_6 = 1;           // Turn on green
             P2_7 = 1;
             break;
         case LANE1:
-            P0_0 = 0;   // turn off red and orange
+            P0_0 = 0;           // Turn off red and orange
             P0_1 = 0;
             P1_0 = 0;
             P1_1 = 0;
-            P2_0 = 1;   // turn on green
+            P2_0 = 1;           // Turn on green
             P2_1 = 1;
             break;
         default:
-            error();
+            error();            // Panic if something went wrong
             break;
     }
 }
@@ -208,31 +208,31 @@ void orange (unsigned char lane)
 {
     switch (lane) {
         case LANE2:    
-            P2_2 = 0;   // turn off green
+            P2_2 = 0;           // Turn off green
             P2_3 = 0;
-            P1_2 = 1;   // turn on orange
+            P1_2 = 1;           // Turn on orange
             P1_3 = 1;
             break;
         case LANE3:
-            P2_4 = 0;   // turn off green
+            P2_4 = 0;           // Turn off green
             P2_5 = 0;
-            P1_4 = 1;   // turn on orange
+            P1_4 = 1;           // Turn on orange
             P1_5 = 1;
             break;
         case LANE4:
-            P2_6 = 0;   // turn off green
+            P2_6 = 0;           // Turn off green
             P2_7 = 0;
-            P1_6 = 1;   // turn on orange
+            P1_6 = 1;           // Turn on orange
             P1_7 = 1;
             break;
         case LANE1:
-            P2_0 = 0;   // turn off green
+            P2_0 = 0;           // Turn off green
             P2_1 = 0;
-            P1_0 = 1;   // turn on orange
+            P1_0 = 1;           // Turn on orange
             P1_1 = 1;
             break;
         default:
-            error();
+            error();            // Panic if something went wrong
             break;
     }
 }
@@ -241,7 +241,7 @@ void foot (unsigned char lane, unsigned char green)
 {
     switch (lane) {
         case LANE2: 
-            if ( green == 1) FOOT2 = 1;
+            if ( green == 1) FOOT2 = 1;     // Turn on green or red on lane "lane" for the walkers depending on "green"
             else FOOT2 = 0;
             break;
         case LANE3:
@@ -257,7 +257,7 @@ void foot (unsigned char lane, unsigned char green)
             else FOOT1 = 0;            
             break;
         default:
-            error();
+            error();                        // Panic if something went wrong
             break;
     }
 }
@@ -268,7 +268,7 @@ void allRed (void)
     P1 = 0;
 }
 
-void error (void) 
+void error (void)                           // Panic if something went wrong
 {
     while (1) {
         P0 = 0;
@@ -284,12 +284,11 @@ void error (void)
 
 struct footb sleep (int seconds, struct footb *test) 
 {
-    unsigned int i;                         // 16-Bit-variable for time input
-    unsigned int c1,c2;                     // 16-Bit-variables for 1-second-pause
-    for (i=seconds;i!=0;i--)                // input-based pause
-        for (c1=0x01E7;c1!=0;c1--){          // 1-second-pause
+    unsigned int i, c1, c2;                     // 16-Bit-variables for 1-second-pause
+    for (i=seconds;i!=0;i--)                    // Input-based pause
+        for (c1=0x01E7;c1!=0;c1--){             // 1-second-pause
             for (c2=0x00FF;c2!=0;c2--);
-            get_pb(&test);
+            get_pb(&test);                      // Get the pushbutton states
         }
     return *test;
 }
