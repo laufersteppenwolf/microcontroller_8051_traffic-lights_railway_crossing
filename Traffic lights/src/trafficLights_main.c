@@ -18,9 +18,9 @@
 
 // #define DEBUGGER
 
-//#define IGNORE_RAILWAY
-#define IGNORE_WALKER_INPUT         // FIXME: Fix short on ext. board
-//#define IGNORE_WALKER_INPUT_A
+// #define IGNORE_RAILWAY
+#define IGNORE_WALKER_INPUT         // FIXME: Fix short on ext. board and panic
+// #define IGNORE_WALKER_INPUT_A
 
 #define LANE1 2
 #define LANE2 3
@@ -54,7 +54,7 @@ P1 = 0;         // make sure everything's off
 P2 = 0;         // make sure everything's off
 
 #ifndef DEBUGGER
-*test = sleep (2, &test);
+*test = sleep (1, &test);
 #endif
 
 init();
@@ -78,13 +78,13 @@ RAILWAY_INPUT = 0;
         lane++;
         *test = sleep (1, &test);
         orangeRed(lane);
-        *test = sleep (1, &test);   // 4
+        *test = sleep (3, &test);
         green(lane);
-        *test = sleep (1, &test);   // 20
+        *test = sleep (20, &test);
         orange(lane);
-        *test = sleep (1, &test);   // 4
+        *test = sleep (4, &test);
         allRed ();
-        *test = sleep (1, &test);   // 4 
+        *test = sleep (2, &test);
 #ifdef IGNORE_WALKER_INPUT_A
         *test->w1 = 1;
         *test->w2 = 1;
@@ -98,7 +98,7 @@ RAILWAY_INPUT = 0;
         if (1) {
 #endif
             foot (lane, 1);
-            sleep (1, &test);   // 4
+            sleep (5, &test);   // 4
             foot (lane, 0);
             sleep (1, &test);
             
